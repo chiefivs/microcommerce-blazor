@@ -1,0 +1,4 @@
+dotnet run --project=.\Tools\ClientGenerator\ClientGenerator.csproj -project=.\Services\ProductCatalog\ProductCatalog.Service\ProductCatalog.Service.csproj -destination=.\Services\ProductCatalog\ProductCatalog.Client
+dotnet run --project=.\Tools\ClientGenerator\ClientGenerator.csproj -project=.\Services\ShoppingCard\ShoppingCard.Service\ShoppingCard.Service.csproj -destination=.\Services\ShoppingCard\ShoppingCard.Client
+dotnet run --project=.\Tools\ClientGenerator\ClientGenerator.csproj -project=.\Services\ActivityLogger\ActivityLogger.Service\ActivityLogger.Service.csproj -destination=.\Services\ActivityLogger\ActivityLogger.Client
+dotnet run --project=.\Tools\ClientGenerator\ClientGenerator.csproj -clean

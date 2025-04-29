@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WebApiClient.Generator": {
+      "commandName": "Project",
+      "commandLineArgs": "-project=D:\\projects\\resume\\microcommerce-2025\\MicroCommerce\\Services\\ProductCatalog\\ProductCatalog.Service\\ProductCatalog.Service.csproj\r\n-destination=D:\\projects\\resume\\microcommerce-2025\\MicroCommerce\\Services\\ProductCatalog\\ProductCatalog.Client"
+    }
+  }
+}

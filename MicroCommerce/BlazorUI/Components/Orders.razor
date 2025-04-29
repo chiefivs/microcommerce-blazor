@@ -1,0 +1,53 @@
+﻿@using MicroCommerce.Models
+@inject DataService DataService
+
+<div class="panel panel-default">
+    <h2>Shopping cart</h2>
+    @if (orders == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <tbody>
+                @foreach(var order in orders)
+                {
+                    <tr>
+                        <td>@order.Product.Name</td>
+                        <td>@order.Quantity</td>
+                        <td class="actions">
+                            <a class="btn btn-primary" @onclick="async () => await DelOrder(order.Id)">DELETE</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    IEnumerable<Order> orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataService.OnOrdersChanged += OnOrdersChanged;
+        await DataService.LoadCard();
+    }
+
+    public void Dispose()
+    {
+        DataService.OnOrdersChanged -= OnOrdersChanged;
+    }
+
+    async Task DelOrder(Guid orderId)
+    {
+        await DataService.DelOrder(orderId);
+    }
+
+    void OnOrdersChanged()
+    {
+        orders = DataService.Orders;
+        StateHasChanged();
+    }
+}

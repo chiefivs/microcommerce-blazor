@@ -1,0 +1,42 @@
+﻿@using MicroCommerce.Models
+@inject DataService DataService
+
+<div class="panel panel-default">
+    <h2>Operations history</h2>
+    <a class="btn btn-primary" style="float: right; margin-top: -40px;" @onclick="ClearLogs">CLEAR</a>
+
+    @foreach (var log in logs)
+    {
+        <div class="log-item">
+            <span>@log.Time</span>
+            <span>@log.Description</span>
+        </div>
+
+    }
+</div>
+
+@code {
+    IEnumerable<LogEvent> logs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataService.OnLogEventssChanged += OnLogsChanged;
+        await DataService.UpdateLogs();
+    }
+
+    public void Dispose()
+    {
+        DataService.OnOrdersChanged -= OnLogsChanged;
+    }
+
+    async Task ClearLogs()
+    {
+        await DataService.ClearLogs();
+    }
+
+    void OnLogsChanged()
+    {
+        logs = DataService.LogEvents;
+        StateHasChanged();
+    }
+}

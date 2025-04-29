@@ -1,0 +1,53 @@
+﻿@using MicroCommerce.Models
+@inject DataService DataService
+
+<div class="panel panel-default">
+    <h2>All products</h2>
+    @if(products == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <tbody>
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td class="actions">
+                            <a class="btn btn-primary" @onclick="async () => await AddOrder(product.Id)">ADD</a>
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    IEnumerable<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        DataService.OnProductsChanged += OnProductsChanged;
+        await DataService.LoadProducts();
+    }
+
+    public void Dispose()
+    {
+        DataService.OnProductsChanged -= OnProductsChanged;
+    }
+
+    async Task AddOrder(Guid productId)
+    {
+        await DataService.AddOrder(productId, 1);
+    }
+
+    void OnProductsChanged()
+    {
+        products = DataService.Products;
+        StateHasChanged();
+    }
+}
