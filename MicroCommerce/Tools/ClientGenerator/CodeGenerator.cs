@@ -130,7 +130,7 @@ namespace ClientGenerator
 
         private string? GenerateType(Type type)
         {
-            if (type.Name.StartsWith("Task"))
+            if (type.Name.StartsWith("Task") || type.Name.StartsWith("ActionResult"))
                 return type.IsGenericType ? GenerateType(type.GenericTypeArguments.First()) : null;
 
             if(!type.FullName!.StartsWith("System.") && !_usings.Contains(type.Namespace!))

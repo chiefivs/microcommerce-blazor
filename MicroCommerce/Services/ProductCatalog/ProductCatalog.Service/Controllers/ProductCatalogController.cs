@@ -51,13 +51,13 @@ namespace ProductCatalog.Service.Controllers
         //}
 
         //[HttpPost("add")]
-        //public async Task AddProduct([FromBody] Product product, [FromQuery] bool active)
+        //public async Task<ActionResult> AddProduct([FromBody] Product product, [FromQuery] bool active)
         //{
-
+        //    return Ok();
         //}
 
         //[HttpPost("create")]
-        //public async Task<Product?> CreateProduct([FromBody] Product product)
+        //public async Task<ActionResult<Product?>> CreateProduct([FromBody] Product product)
         //{
         //    return product;
         //}
